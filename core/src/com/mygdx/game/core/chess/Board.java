@@ -10,26 +10,23 @@ public class Board {
     }
 
     public final String[][] position =new String[][]{
-            {"W","S","G","H","K","G","S","W"},
-            {"P","P","P","P","P","P","P","P"},
-            {" "," "," "," "," "," "," "," "},
-            {" "," "," "," "," "," "," "," "},
-            {" "," "," "," "," "," "," "," "},
-            {" "," "," "," "," "," "," "," "},
+            {"w","s","g","h","k","g","s","w"},
             {"p","p","p","p","p","p","p","p"},
-            {"w","s","g","h","k","g","s","w"}
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {"P","P","P","P","P","P","P","P"},
+            {"W","S","G","H","K","G","S","W"}
     };
     private colorT orientation;
     private  Cell[][] board;
     private PosMoves posMoves;
 
-    Board(){
+    Board(colorT colorPrespective){
         board = new Cell[8][8];
         setupBoard();
-        setPawns();
-        setupSpritePositionbyWhite();
-        resetAllSpritePosition();
-        orientation = colorT.black;
+        setPawns(colorPrespective);
         posMoves = new PosMoves();
         posMoves.matrix = new int[][]{
                 {0,0,0,0,0,0,0,0},
@@ -50,67 +47,61 @@ public class Board {
             for(int j = 0;j <8; j++,x++){
 
                 if(x%2==0) {
-                    board[i][j] = new Cell(i,j,colorT.white,true,c);
+                    board[i][j] = new Cell(i,j,colorT.white,c);
                 }
                 else {
-                    board[i][j] =new Cell(i,j,colorT.black,true,c);
+                    board[i][j] =new Cell(i,j,colorT.black,c);
                 }
-                board[i][j].getSprite().setSize(CONFIG.CELL_WIDTH,CONFIG.CELL_HEIGHT);
                 c++;
             }
         }
     }
-    private void setPawns(){
-        for(int i = 0;i<8;i++){
-            for(int j = 0;j <8; j++) {
-                if (position[i][j] == "p") {
-                    board[i][j].setPiece(new Pawn(colorT.black));
-                } else if (position[i][j] == "P") {
-                    board[i][j].setPiece(new Pawn(colorT.white));
-                } else if (position[i][j] == "g") {
-                    board[i][j].setPiece(new Bishop(colorT.black));
-                } else if (position[i][j] == "G") {
-                    board[i][j].setPiece(new Bishop(colorT.white));
-                } else if (position[i][j] == "S") {
-                    board[i][j].setPiece(new Knight(colorT.white));
-                } else if (position[i][j] == "s") {
-                    board[i][j].setPiece(new Knight(colorT.black));
-                } else if (position[i][j] == "H") {
-                    board[i][j].setPiece(new Queen(colorT.white));
-                } else if (position[i][j] == "h") {
-                    board[i][j].setPiece(new Queen(colorT.black));
-                } else if (position[i][j] == "W") {
-                    board[i][j].setPiece(new Rook(colorT.white));
-                } else if (position[i][j] == "w") {
-                    board[i][j].setPiece(new Rook(colorT.black));
-                } else if (position[i][j] == "k") {
-                    board[i][j].setPiece(new King(colorT.black));
-                } else if (position[i][j] == "K") {
-                    board[i][j].setPiece(new King(colorT.white));
-                }
-                if(board[i][j].isEmpty()){
-                    continue;
-                }
-                board[i][j].getPiece().getSprite().setSize(CONFIG.PIECE_TEXTURE_SIZE_X, CONFIG.PIECE_TEXTURE_SIZE_Y);
-            }
+    private void setPawns(colorT colorPerspective){
+        int tx,ty;
+        if(colorPerspective == colorT.white) {
+             tx = 0;
+             ty = 0;
         }
-    }
-    private void setupSpritePositionbyWhite() {
-        orientation = colorT.white;
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    board[i][j].getSprite().setPosition(CONFIG.CHESS_BOARD_X + j * CONFIG.CELL_WIDTH, CONFIG.CHESS_BOARD_Y + i * CONFIG.CELL_HEIGHT);
-
-                    if (board[i][j].isEmpty()) {
-                        continue;
+        else{
+             tx = -7;
+             ty = -7;
+        }
+            for (int i = 0, iy = ty; i <8; i++,iy+=1) {
+                for (int j = 0,ix = tx; j <8; j++,ix+=1) {
+                    int x = Math.abs(ix);
+                    int y = Math.abs(iy);
+                    if (position[i][j] == "p") {
+                        board[y][x].setPiece(new Pawn(colorT.black));
+                    } else if (position[i][j] == "P") {
+                        board[y][x].setPiece(new Pawn(colorT.white));
+                    } else if (position[i][j] == "g") {
+                        board[y][x].setPiece(new Bishop(colorT.black));
+                    } else if (position[i][j] == "G") {
+                        board[y][x].setPiece(new Bishop(colorT.white));
+                    } else if (position[i][j] == "S") {
+                        board[y][x].setPiece(new Knight(colorT.white));
+                    } else if (position[i][j] == "s") {
+                        board[y][x].setPiece(new Knight(colorT.black));
+                    } else if (position[i][j] == "H") {
+                        board[y][x].setPiece(new Queen(colorT.white));
+                    } else if (position[i][j] == "h") {
+                        board[y][x].setPiece(new Queen(colorT.black));
+                    } else if (position[i][j] == "W") {
+                        board[y][x].setPiece(new Rook(colorT.white));
+                    } else if (position[i][j] == "w") {
+                        board[y][x].setPiece(new Rook(colorT.black));
+                    } else if (position[i][j] == "k") {
+                        board[y][x].setPiece(new King(colorT.black));
+                    } else if (position[i][j] == "K") {
+                        board[y][x].setPiece(new King(colorT.white));
+                    } else if (position[i][j] == " ") {
+                        board[y][x].setPiece(new Empty(colorT.white));
                     }
-                    board[i][j].getPiece().getSprite().setPosition(CONFIG.CHESS_BOARD_X + j * CONFIG.CELL_WIDTH + CONFIG.PIECE_TEXTURE_OFFSET_X, CONFIG.CHESS_BOARD_Y + i * CONFIG.CELL_HEIGHT + CONFIG.PIECE_TEXTURE_OFFSET_Y);
-
                 }
             }
-
-
         }
+
+/*
 
 
     private void resetAllSpritePosition(){
@@ -150,7 +141,7 @@ public class Board {
             }
         }
       //  } else {
-        /*
+
             for (int i = 7,y = 0; i >=0; i--,y++) {
                 for (int j = 0,x =7; j < 8; j++,x--) {
                     board[i][i].getSprite().setPosition(CONFIG.CHESS_BOARD_X + y * CONFIG.CELL_WIDTH, CONFIG.CHESS_BOARD_Y + x * CONFIG.CELL_HEIGHT);
@@ -161,30 +152,21 @@ public class Board {
                     board[j][i].getPiece().getSprite().setPosition(CONFIG.CHESS_BOARD_X + y * CONFIG.CELL_WIDTH + CONFIG.PIECE_TEXTURE_OFFSET_X, CONFIG.CHESS_BOARD_Y + x * CONFIG.CELL_HEIGHT + CONFIG.PIECE_TEXTURE_OFFSET_Y);
                 }
             }
-        }
 
 
-         */
     }
 
+
+ */
 
     ///  PUBLIC
     public Cell[][] getPieces(){
         return board;
     }
-    public Cell[] getPiecesArray(){
-        Cell[] temp = new Cell[64];
-        for(int i = 0; i<8;i++){
-            for(int j = 0; j<8;j++){
-                temp[i+j] = board[i][j];
-            }
-        }
-        return temp;
+    public PosMoves getPosMoves(){
+        return posMoves;
     }
-    public void changeOrientation(colorT orient){
-        orientation = orient;
-        resetAllSpritePosition();
-    }
+
     public void dispose(){
         for(int i = 0;i<8;i++){
             for(int j = 0;j <8; j++){
@@ -214,14 +196,13 @@ public class Board {
         posMoves.matrix = iposMovesMatrix;
     }
 
-    public PosMoves getPosMoves(){
-        return posMoves;
-    }
 
     public void printMatrixBoard(){
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-
+                if(i==0 && j == 0){
+                    System.out.print("1");
+                }
                 if (position[i][j] == " ") {
                     System.out.print(" . ");
                     continue;
@@ -231,6 +212,15 @@ public class Board {
             }
             System.out.println("");
         }
+    }
+    public Cell[] getPiecesArray(){
+        Cell[] temp = new Cell[64];
+        for(int i = 0; i<8;i++){
+            for(int j = 0; j<8;j++){
+                temp[i+j] = board[i][j];
+            }
+        }
+        return temp;
     }
 
     public void printPosMatrixBoard(){

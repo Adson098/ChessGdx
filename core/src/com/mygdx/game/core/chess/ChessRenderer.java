@@ -8,13 +8,10 @@ import com.mygdx.game.core.chess.Chess;
 public class ChessRenderer extends Chess {
 
     private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
 
     public ChessRenderer() {
         super();
         batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        shapeRenderer.setColor(Color.CYAN);
 
 
     }
@@ -27,12 +24,6 @@ public class ChessRenderer extends Chess {
                     board.getPieces()[j][i].getSprite().draw(batch);
                     if(!board.getPieces()[j][i].isEmpty()) {
                         board.getPieces()[j][i].getPiece().getSprite().draw(batch);
-
-                        if(board.getPosMoves().matrix[j][i] == 2 ||board.getPosMoves().matrix[j][i] == 3){
-                            int tempX = (int)board.getPieces()[j][i].getPiece().getSprite().getX();
-                            int tempY = (int)board.getPieces()[j][i].getPiece().getSprite().getY();
-                            System.out.println("gowno");
-                        }
                     }
 
                 }

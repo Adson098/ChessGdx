@@ -15,26 +15,20 @@ public class TEST1 extends ApplicationAdapter {
     @Override
     public void create () {
         state = 0;
+        gowno();
 
+    }
+    void gowno(){
+        int x = -4;
+        System.out.println(x);
+        x++;
+        System.out.println(x);
 
     }
 
     @Override
     public void render () {
 
-        //if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && state == 0){
-           // System.out.println("nacisnieto coord : " + Gdx.input.getX() + " y: " + Math.abs(Gdx.input.getY()-720));
-       // }
-       if(!Gdx.input.isTouched()&&state == 1){
-            System.out.println("puszczone coord x: " + Gdx.input.getX() + " y: " + Math.abs(Gdx.input.getY()-720));
-            state = 0;
-
-        }
-
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-            System.out.println("nacisnieto coord : " + Gdx.input.getX() + " y: " + Math.abs(Gdx.input.getY()-720));
-            state =1;
-        }
 
     }
 }

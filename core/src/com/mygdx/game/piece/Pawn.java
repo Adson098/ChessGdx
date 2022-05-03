@@ -29,25 +29,25 @@ public class Pawn extends piece {
         moves1 = new piece.Moves();
         moves2 = new piece.Moves();
         moves1.MOVES = new int[][]{
-                {3,2,3,0,0,0,0,0},   /// 1 lokalizacja pionka
-                {0,1,0,0,0,0,0,0},   /// 3 gdzie moze bic
+                {3,2,3},   /// 1 lokalizacja pionka
+                {0,1,0}  /// 3 gdzie moze bic
         };
 
         moves1.location.x = 1;
         moves1.location.y = 1;
-        moves1.size.x = 8;
+        moves1.size.x = 3;
         moves1.size.y = 2;
 
         /// moves2 1 ruch pionka
 
         moves2.MOVES = new int[][]{
-                {3,2,3,0,0,0,0,0},   /// 1 lokalizacja pionka
-                {0,2,0,0,0,0,0,0},   /// 3 gdzie moze bic
-                {0,1,0,0,0,0,0,0}
+                {3,2,3},   /// 1 lokalizacja pionka
+                {0,2,0},   /// 3 gdzie moze bic
+                {0,1,0}
         };
         moves2.location.x = 1;
         moves2.location.y = 2;
-        moves2.size.x = 8;
+        moves2.size.x = 3;
         moves2.size.y = 3;
 
     }

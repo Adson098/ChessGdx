@@ -23,4 +23,11 @@ public class CONFIG {
     public static final int PIECE_TEXTURE_SIZE_X = 55;
     public static final int PIECE_TEXTURE_SIZE_Y = 60;
 
+    public static final int TRANSLATE_Y_TO_LUC(int y){
+        int iy = WINDOW_HEIGHT - y;
+     //   iy  = Math.abs(y- WINDOW_HEIGHT);
+
+        return iy;
+    }
+
 }

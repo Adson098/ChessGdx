@@ -18,7 +18,7 @@ public class PosMovesCalculator {
         int[][] tempMatrix = new int[8][8];
         int[][] posMatrix = icell.getPiece().getMoves().MOVES;
 
-        int startPointY = icell.y;
+        int startPointY = icell.i;
         /*
         for(int i = icell.y;i<posMatrixSize.y+icell.y;i++) {
             for (int j = 0; j < posMatrixSize.x; j++) {
@@ -37,8 +37,8 @@ public class PosMovesCalculator {
         }
         */
 
-        int deltaX = posPieceX - icell.x;
-        int deltaY = posPieceY -icell.y;
+        int deltaX = posPieceX - icell.j;
+        int deltaY = posPieceY -icell.i;
         for(int i = 0;i<posMatrixSize.y && i <8;i++){
             for(int j = 0; j < posMatrixSize.x && j <8;j++){
                 if(j+deltaX >0 && j+deltaX <8) {

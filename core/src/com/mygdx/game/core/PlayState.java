@@ -1,7 +1,9 @@
 package com.mygdx.game.core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.mygdx.game.CONFIG;
+import com.mygdx.game.core.chess.Cell;
 import com.mygdx.game.core.chess.ChessRenderer;
 import com.mygdx.game.engine.GameState;
 
@@ -31,7 +33,7 @@ public class PlayState implements GameState {
     @Override
     public void input() {
                 int clickX = Gdx.input.getX();
-                int clickY = Math.abs(Gdx.input.getY() - CONFIG.WINDOW_HEIGHT);
+                int clickY =Gdx.input.getY();
                 if (clickX >= CONFIG.CHESS_BOARD_X && clickX <= CONFIG.CHESS_BOARD_X + (8 * CONFIG.CELL_WIDTH)) {
                     if (clickY >= CONFIG.CHESS_BOARD_Y && clickY <= CONFIG.CHESS_BOARD_Y + (8 * CONFIG.CELL_HEIGHT)) {
                         chess.clickInput(clickX, clickY);
